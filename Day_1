@@ -1,0 +1,87 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <limits.h>
+
+#define MAX 100  // Maximum size of the stack
+
+// Stack structure
+struct Stack {
+    int top;
+    int items[MAX];
+};
+
+// Function to initialize the stack
+void initStack(struct Stack* s) {
+    s->top = -1;  // Stack is initially empty
+}
+
+// Function to check if the stack is full
+int isFull(struct Stack* s) {
+    return s->top == MAX - 1;  // Returns 1 if full, 0 otherwise
+}
+
+// Function to check if the stack is empty
+int isEmpty(struct Stack* s) {
+    return s->top == -1;  // Returns 1 if empty, 0 otherwise
+}
+
+// Function to add an element to the stack
+void push(struct Stack* s, int value) {
+    if (isFull(s)) {
+        printf("Stack overflow! Unable to push %d\n", value);
+    } else {
+        s->items[++s->top] = value;  // Increment top and add value
+        printf("Pushed %d to stack\n", value);
+    }
+}
+
+// Function to remove an element from the stack
+int pop(struct Stack* s) {
+    if (isEmpty(s)) {
+        printf("Stack underflow! Unable to pop\n");
+        return INT_MIN;  // Return a sentinel value
+    } else {
+        return s->items[s->top--];  // Return top value and decrement
+    }
+}
+
+// Function to peek at the top element of the stack
+int peek(struct Stack* s) {
+    if (isEmpty(s)) {
+        printf("Stack is empty! Unable to peek\n");
+        return INT_MIN;  // Return a sentinel value
+    } else {
+        return s->items[s->top];  // Return top value without removing it
+    }
+}
+
+// Function to display the stack elements
+void display(struct Stack* s) {
+    if (isEmpty(s)) {
+        printf("Stack is empty\n");
+    } else {
+        printf("Stack elements: ");
+        for (int i = 0; i <= s->top; i++) {
+            printf("%d ", s->items[i]);
+        }
+        printf("\n");
+    }
+}
+
+// Main function to demonstrate stack operations
+int main() {
+    struct Stack s;
+    initStack(&s);
+
+    push(&s, 7);
+    push(&s, 18);
+    push(&s, 45);
+    display(&s);
+
+    printf("Popped element: %d\n", pop(&s));
+    display(&s);
+
+    printf("Top element: %d\n", peek(&s));
+
+    return 0;
+}
