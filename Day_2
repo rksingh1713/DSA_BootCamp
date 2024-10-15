@@ -1,0 +1,99 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+#define MAX 100  // Maximum size of the queue
+
+// Queue structure
+struct Queue {
+    int front;
+    int rear;
+    int items[MAX];
+};
+
+// Function to initialize the queue
+void initQueue(struct Queue* q) {
+    q->front = -1;
+    q->rear = -1;
+}
+
+// Function to check if the queue is empty
+int isEmpty(struct Queue* q) {
+    return q->front == -1;  // Returns 1 if empty, 0 otherwise
+}
+
+// Function to check if the queue is full
+int isFull(struct Queue* q) {
+    return q->rear == MAX - 1;  // Returns 1 if full, 0 otherwise
+}
+
+// Function to add a request (floor) to the queue
+void enqueue(struct Queue* q, int floor) {
+    if (isFull(q)) {
+        printf("Queue is full! Unable to add request for floor %d\n", floor);
+    } else {
+        if (isEmpty(q)) {
+            q->front = 0;  // Set front to 0 if adding the first element
+        }
+        q->items[++q->rear] = floor;  // Increment rear and add the floor
+        printf("Added request for floor %d\n", floor);
+    }
+}
+
+// Function to remove a request (floor) from the queue
+int dequeue(struct Queue* q) {
+    if (isEmpty(q)) {
+        printf("Queue is empty! No requests to process\n");
+        return -1;  // Return -1 if the queue is empty
+    } else {
+        int floor = q->items[q->front];  // Get the front floor
+        // Shift elements forward
+        if (q->front >= q->rear) {
+            // If the queue is now empty after this operation
+            q->front = -1;
+            q->rear = -1;
+        } else {
+            q->front++;  // Increment front
+        }
+        return floor;  // Return the requested floor
+    }
+}
+
+// Function to display all requests in the queue
+void displayQueue(struct Queue* q) {
+    if (isEmpty(q)) {
+        printf("No requests in the queue\n");
+    } else {
+        printf("Requests in the queue: ");
+        for (int i = q->front; i <= q->rear; i++) {
+            printf("%d ", q->items[i]);
+        }
+        printf("\n");
+    }
+}
+
+// Main function to simulate lift management
+int main() {
+    struct Queue q;
+    initQueue(&q);
+    
+    // Simulating adding requests for different floors
+    enqueue(&q, 4);
+    enqueue(&q, 5);
+    enqueue(&q, 6);
+    enqueue(&q, 7);
+    enqueue(&q, 8);
+    enqueue(&q, 5);
+    enqueue(&q, 0);
+    displayQueue(&q);
+    
+    // Simulating processing requests
+    int floor;
+    while (!isEmpty(&q)) {
+        floor = dequeue(&q);
+        if (floor != -1) {
+            printf("Lift moving to floor %d\n", floor);
+        }
+    }
+    
+    return 0;
+}
