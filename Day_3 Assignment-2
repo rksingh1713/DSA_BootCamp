@@ -1,0 +1,102 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+// Define a node
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+struct Node* head = NULL;
+
+// Create a new node
+struct Node* createNode(int data) {
+    struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+    newNode->data = data;
+    newNode->next = NULL;
+    return newNode;
+}
+
+// Insert at the beginning
+void insertAtBeginning(int data) {
+    struct Node* newNode = createNode(data);
+    newNode->next = head;
+    head = newNode;
+    printf("Inserted %d at the beginning\n", data);
+}
+
+// Insert at the end
+void insertAtEnd(int data) {
+    struct Node* newNode = createNode(data);
+    if (head == NULL) {
+        head = newNode;
+        return;
+    }
+    struct Node* temp = head;
+    while (temp->next != NULL) {
+        temp = temp->next;
+    }
+    temp->next = newNode;
+    printf("Inserted %d at the end\n", data);
+}
+
+// Delete the first node
+void deleteAtBeginning() {
+    if (head == NULL) {
+        printf("List is empty\n");
+        return;
+    }
+    struct Node* temp = head;
+    head = head->next;
+    printf("Deleted %d from the beginning\n", temp->data);
+    free(temp);
+}
+
+// Delete the last node
+void deleteAtEnd() {
+    if (head == NULL) {
+        printf("List is empty\n");
+        return;
+    }
+    if (head->next == NULL) {
+        free(head);
+        head = NULL;
+        return;
+    }
+    struct Node* temp = head;
+    struct Node* prev = NULL;
+    while (temp->next != NULL) {
+        prev = temp;
+        temp = temp->next;
+    }
+    prev->next = NULL;
+    printf("Deleted %d from the end\n", temp->data);
+    free(temp);
+}
+
+// Display the list
+void display() {
+    struct Node* temp = head;
+    if (temp == NULL) {
+        printf("List is empty\n");
+        return;
+    }
+    printf("Linked List: ");
+    while (temp != NULL) {
+        printf("%d -> ", temp->data);
+        temp = temp->next;
+    }
+    printf("NULL\n");
+}
+
+int main() {
+    insertAtBeginning(7);
+    insertAtEnd(18);
+    insertAtEnd(45);
+    display();
+    deleteAtBeginning();
+    display();
+    deleteAtEnd();
+    display();
+    return 0;
+}
