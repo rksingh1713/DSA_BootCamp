@@ -1,0 +1,139 @@
+#include <stdio.h>
+#define SIZE 5
+
+int queue[SIZE], front = -1, rear = -1;
+
+// Check if the queue is full
+int isFull() {
+    return ((front == 0 && rear == SIZE - 1) || (front == rear + 1));
+}
+
+// Check if the queue is empty
+int isEmpty() {
+    return (front == -1);
+}
+
+// Enqueue element in circular queue
+void enqueue(int element) {
+    if (isFull()) {
+        printf("Queue is full. Cannot enqueue %d\n", element);
+    } else {
+        if (front == -1) front = 0; 
+        rear = (rear + 1) % SIZE;  
+        queue[rear] = element;
+        printf("Enqueued: %d\n", element);  
+    }
+}
+
+// Dequeue element from circular queue
+void dequeue() {
+    if (isEmpty()) {
+        printf("Queue is empty. Cannot dequeue\n");
+    } else {
+        printf("Dequeued: %d\n", queue[front]);
+        if (front == rear) {
+            front = rear = -1;  
+        } else {
+            front = (front + 1) % SIZE; 
+        }
+    }
+}
+
+// Insert at the front (Deque operation)
+void insertFront(int element) {
+    if (isFull()) {
+        printf("Deque is full. Cannot insert %d at front\n", element);
+    } else {
+        if (front == -1) {
+            front = rear = 0;  
+        } else if (front == 0) {
+            front = SIZE - 1;  
+        } else {
+            front--; 
+        }
+        queue[front] = element;
+        printf("Inserted %d at front\n", element); 
+    }
+}
+
+// Insert at the rear (Deque operation)
+void insertRear(int element) {
+    enqueue(element); 
+}
+
+// Delete from the front (Deque operation)
+void deleteFront() {
+    dequeue(); 
+}
+
+// Delete from the rear (Deque operation)
+void deleteRear() {
+    if (isEmpty()) {
+        printf("Deque is empty. Cannot delete from rear\n");
+    } else {
+        printf("Deleted %d from rear\n", queue[rear]);  
+        if (front == rear) {
+            front = rear = -1; 
+        } else if (rear == 0) {
+            rear = SIZE - 1; 
+        } else {
+            rear--;  
+        }
+    }
+}
+
+// Display the queue
+void display() {
+    if (isEmpty()) {
+        printf("Queue is empty\n");
+    } else {
+        printf("Queue: ");
+        int i = front;
+        while (i != rear) {
+            printf("%d ", queue[i]);
+            i = (i + 1) % SIZE;
+        }
+        printf("%d\n", queue[rear]); 
+    }
+}
+
+int main() {
+    printf("=== Circular Queue Operations ===\n");
+    
+    // Circular Queue Operations
+    printf("Performing enqueue operations:\n");
+    enqueue(7);  
+    enqueue(18);   
+    enqueue(45);
+    display();  
+    
+    printf("Performing dequeue operation:\n");
+    dequeue();   
+    display();    
+    
+    printf("Enqueue more elements:\n");
+    enqueue(17);  
+    enqueue(63);  
+    display();  
+    
+    printf("\n=== Deque Operations ===\n");
+    
+    // Deque Operations
+    printf("Inserting element at the front:\n");
+    insertFront(10); 
+    display();   
+    
+    printf("Deleting element from the rear:\n");
+    deleteRear();   
+    display();     
+    
+    printf("Inserting element at the rear:\n");
+    insertRear(81);   
+    display();    
+    
+    printf("Deleting element from the front:\n");
+    deleteFront();  
+    display();     
+    
+    return 0;
+}
