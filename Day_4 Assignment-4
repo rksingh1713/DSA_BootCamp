@@ -1,0 +1,51 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+// Node structure
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+// Function to print linked list in reverse order using recursion
+void print_reverse(struct Node* head) {
+    if (head == NULL)
+        return;
+    
+    // Recursive call to go to the end of the list
+    print_reverse(head->next);
+    
+    // Print the current node's data after recursion returns
+    printf("%d ", head->data);
+}
+
+// Function to push a new node onto the linked list
+void push(struct Node** head_ref, int new_data) {
+    struct Node* new_node = (struct Node*)malloc(sizeof(struct Node));
+    new_node->data = new_data;
+    new_node->next = *head_ref;
+    *head_ref = new_node;
+}
+
+// Driver code
+int main() {
+    struct Node* head = NULL;
+    
+    push(&head, 7);
+    push(&head, 10);
+    push(&head, 18);
+    push(&head, 45);
+    push(&head, 63);
+    
+    printf("Original Linked List: ");
+    struct Node* temp = head;
+    while (temp != NULL) {
+        printf("%d ", temp->data);
+        temp = temp->next;
+    }
+    
+    printf("\nReversed Linked List: ");
+    print_reverse(head);
+    
+    return 0;
+}
