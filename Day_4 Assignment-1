@@ -1,0 +1,74 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+// Node structure for linked list
+struct Node {
+    int data;
+    struct Node* next;
+};
+
+// Function to push an element onto the stack
+void push(struct Node** top_ref, int new_data) {
+    // Create a new node
+    struct Node* new_node = (struct Node*)malloc(sizeof(struct Node));
+    if (!new_node) {
+        printf("Stack overflow\n");
+        exit(0);
+    }
+
+    // Assign data to the new node
+    new_node->data = new_data;
+
+    // Make the new node point to the current top
+    new_node->next = *top_ref;
+
+    // Update the top pointer
+    *top_ref = new_node;
+
+    printf("Pushed %d to stack\n", new_data);
+}
+
+// Function to pop an element from the stack
+int pop(struct Node** top_ref) {
+    if (*top_ref == NULL) {
+        printf("Stack is empty\n");
+        return -1;
+    }
+
+    struct Node* temp = *top_ref;
+    int popped = temp->data;
+
+    *top_ref = (*top_ref)->next;
+    free(temp);
+
+    return popped;
+}
+
+// Function to peek the top element of the stack
+int peek(struct Node* top) {
+    if (top == NULL) {
+        printf("Stack is empty\n");
+        return -1;
+    }
+    return top->data;
+}
+
+// Function to check if the stack is empty
+int is_empty(struct Node* top) {
+    return top == NULL;
+}
+
+// Driver code
+int main() {
+    struct Node* stack = NULL;
+
+    push(&stack, 7);
+    push(&stack, 18);
+    push(&stack, 45);
+
+    printf("Top element is %d\n", peek(stack));
+    printf("Popped element is %d\n", pop(&stack));
+    printf("Top element after pop is %d\n", peek(stack));
+
+    return 0;
+}
