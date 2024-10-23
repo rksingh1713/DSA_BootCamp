@@ -1,0 +1,120 @@
+1.   Binary Tree Overview:
+     A binary tree is a tree data structure where each node has at most two children, referred to as the 
+     left child and the right child. It is widely used in various applications, such as 
+     searching, sorting, and organizing hierarchical data.
+
+2.   Types of Binary Trees Based on Different Criteria:
+a).  Based on Number of Levels (Height):
+
+     i). Full Binary Tree:-
+         Every level, except possibly the last, is completely filled, and all nodes are as far left as possible.
+         If a node has children, it must have both left and right children.
+         Example:
+                     1
+                    / \
+                   2   3
+                  / \ / \
+                 4  5 6  7
+
+     ii). Complete Binary Tree:-
+          All levels except possibly the last are fully filled. In the last level, all nodes are left-aligned.
+          Example:
+    
+                      1
+                     / \
+                    2   3
+                   / \  /
+                  4  5  6
+
+     iii). Perfect Binary Tree:-
+           A binary tree where all internal nodes have two children, and all leaf nodes are at the same level.
+           Example:
+                  
+                        1
+                       / \
+                      2   3
+                     / \ / \
+                    4  5 6  7
+
+      iv). Balanced Binary Tree:-
+           A binary tree where the height difference between the left and right subtrees for any node is no more than 1.
+           Example:
+                        1
+                       / \
+                      2   3
+                     /   /
+                    4   5
+
+      v). Skewed Binary Tree:-
+          A binary tree where each node has only one child. It can be left-skewed or right-skewed.
+          Left-Skewed:
+                  
+                   1
+                  /
+                2 / 3
+
+              - **Right-Skewed:**
+                    1
+                    2
+                    3
+
+b. Based on Node Values:
+
+   i). Binary Search Tree (BST):-
+       A binary tree where the value of the left child is less than the parent, and the value of the right child is 
+       greater than the parent. This property is recursively true for all subtrees.
+       Example:
+                 8
+                / \
+               3   10
+              / \    \
+             1   6    14
+                / \   /
+               4   7 13
+    ii). Binary Heap:-
+         A complete binary tree where all parent nodes are either greater (Max-Heap) or smaller (Min-Heap) than their children.
+         Max-Heap Example:
+              
+                   10
+                  /  \
+                 9    8
+                / \  / \
+               5  6 4  3
+
+             Min-Heap Example:
+
+                   1
+                  / \
+                 3   6
+                / \  /
+               5   9 8
+c. Based on Number of Children:-
+
+    i). Full Binary Tree:-
+        A binary tree in which every node other than the leaves has exactly two children.
+        Example:
+          
+               1
+              / \
+             2   3
+            / \
+           4   5
+
+    ii). Strict Binary Tree:-
+         Every non-leaf node has exactly two children.
+         Example:
+                 1
+                / \
+               2   3
+              / \
+             4   5
+
+  iii). Degenerate (or Pathological) Tree:-
+        A tree where each parent node has only one child. This can take the form of a linked list.
+        Example (Skewed Tree):
+
+                1
+                 \
+                  2
+                   \
+                    3
