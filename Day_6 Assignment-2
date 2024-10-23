@@ -1,0 +1,165 @@
+In this part of the assignment, we will create a Binary Search Tree (BST) in C and implement the following operations:
+
+Insertion
+Deletion
+Display (Inorder, Preorder, Postorder Traversal)
+Here's the complete C code for the Binary Search Tree operations:
+
+Binary Search Tree in C:-
+
+    #include <stdio.h>
+    #include <stdlib.h>
+    
+    // Definition of the Node structure
+    struct Node {
+        int data;
+        struct Node* left;
+        struct Node* right;
+    };
+    
+    // Function to create a new node
+    struct Node* createNode(int value) {
+        struct Node* newNode = (struct Node*)malloc(sizeof(struct Node));
+        newNode->data = value;
+        newNode->left = newNode->right = NULL;
+        return newNode;
+    }
+    
+    // Insert a new node in the BST
+    struct Node* insert(struct Node* root, int value) {
+        if (root == NULL) {
+            return createNode(value);
+        }
+    
+        if (value < root->data) {
+            root->left = insert(root->left, value);
+        } else if (value > root->data) {
+            root->right = insert(root->right, value);
+        }
+    
+        return root;
+    }
+    
+    // Inorder traversal (Left, Root, Right)
+    void inorder(struct Node* root) {
+        if (root != NULL) {
+            inorder(root->left);
+            printf("%d ", root->data);
+            inorder(root->right);
+        }
+    }
+    
+    // Preorder traversal (Root, Left, Right)
+    void preorder(struct Node* root) {
+        if (root != NULL) {
+            printf("%d ", root->data);
+            preorder(root->left);
+            preorder(root->right);
+        }
+    }
+    
+    // Postorder traversal (Left, Right, Root)
+    void postorder(struct Node* root) {
+        if (root != NULL) {
+            postorder(root->left);
+            postorder(root->right);
+            printf("%d ", root->data);
+        }
+    }
+    
+    // Find the minimum value node
+    struct Node* findMin(struct Node* node) {
+        struct Node* current = node;
+        while (current && current->left != NULL) {
+            current = current->left;
+        }
+        return current;
+    }
+    
+    // Delete a node in the BST
+    struct Node* deleteNode(struct Node* root, int value) {
+        if (root == NULL) {
+            return root;
+        }
+    
+        if (value < root->data) {
+            root->left = deleteNode(root->left, value);
+        } else if (value > root->data) {
+            root->right = deleteNode(root->right, value);
+        } else {
+            if (root->left == NULL) {
+                struct Node* temp = root->right;
+                free(root);
+                return temp;
+            } else if (root->right == NULL) {
+                struct Node* temp = root->left;
+                free(root);
+                return temp;
+            }
+    
+            struct Node* temp = findMin(root->right);
+            root->data = temp->data;
+            root->right = deleteNode(root->right, temp->data);
+        }
+        return root;
+    }
+    
+    // Main function
+    int main() {
+        struct Node* root = NULL;
+        root = insert(root, 45);
+        root = insert(root, 7);
+        root = insert(root, 18);
+        root = insert(root, 63);
+        root = insert(root, 10);
+        root = insert(root, 33);
+        root = insert(root, 99);
+    
+        printf("Inorder traversal: ");
+        inorder(root);
+        printf("\n");
+    
+        printf("Preorder traversal: ");
+        preorder(root);
+        printf("\n");
+    
+        printf("Postorder traversal: ");
+        postorder(root);
+        printf("\n");
+    
+        printf("\nDeleting 20\n");
+        root = deleteNode(root, 20);
+        printf("Inorder traversal after deletion: ");
+        inorder(root);
+        printf("\n");
+    
+        return 0;
+    }
+
+
+Explanation of the Code:
+
+Insertion:-
+The insert() function adds a new node with a specific value to the tree. It compares the new value with the 
+current node to decide whether to insert it in the left or right subtree.
+
+Traversal:-
+The functions inorder(), preorder(), and postorder() implement different tree traversals:
+Inorder: Left subtree -> Root -> Right subtree
+Preorder: Root -> Left subtree -> Right subtree
+Postorder: Left subtree -> Right subtree -> Root
+
+Deletion:-
+The deleteNode() function removes a node from the tree. It handles three cases:
+Node to be deleted has no children (a leaf node).
+Node to be deleted has one child.
+Node to be deleted has two children.
+
+Find Min:-
+The findMin() function helps find the minimum value node in the right subtree during the deletion of a node with two children.
+
+Running the Code:-
+When you run the code, it performs insertion of nodes, displays the tree in different traversal orders, 
+deletes a node, and then displays the tree again.
+
+
