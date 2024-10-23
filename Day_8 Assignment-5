@@ -1,0 +1,96 @@
+#include <stdio.h>
+
+// Function for Linear Search
+int linearSearch(int arr[], int n, int x) {
+    for (int i = 0; i < n; i++) {
+        if (arr[i] == x)
+            return i; // Element found at index i
+    }
+    return -1; // Element not found
+}
+
+// Function for Binary Search (Array must be sorted)
+int binarySearch(int arr[], int low, int high, int x) {
+    while (low <= high) {
+        int mid = low + (high - low) / 2;
+        
+        if (arr[mid] == x)
+            return mid; // Element found at mid
+        if (arr[mid] < x)
+            low = mid + 1; // Search the right half
+        else
+            high = mid - 1; // Search the left half
+    }
+    return -1; // Element not found
+}
+
+// Function to sort the array (required for Binary Search)
+void bubbleSort(int arr[], int n) {
+    for (int i = 0; i < n - 1; i++) {
+        for (int j = 0; j < n - i - 1; j++) {
+            if (arr[j] > arr[j + 1]) {
+                int temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+            }
+        }
+    }
+}
+
+// Function to print the array
+void printArray(int arr[], int size) {
+    for (int i = 0; i < size; i++)
+        printf("%d ", arr[i]);
+    printf("\n");
+}
+
+int main() {
+    int arr[100], n, x, choice, result;
+    
+    // Input array
+    printf("Enter number of elements in the array: ");
+    scanf("%d", &n);
+    
+    printf("Enter the elements of the array: \n");
+    for (int i = 0; i < n; i++)
+        scanf("%d", &arr[i]);
+    
+    // Element to search
+    printf("Enter the element to search: ");
+    scanf("%d", &x);
+    
+    // Choose search method
+    printf("Choose search algorithm:\n");
+    printf("1. Linear Search\n");
+    printf("2. Binary Search\n");
+    scanf("%d", &choice);
+
+    switch (choice) {
+        case 1:
+            // Linear Search
+            result = linearSearch(arr, n, x);
+            if (result != -1)
+                printf("Element found at index %d using Linear Search.\n", result);
+            else
+                printf("Element not found using Linear Search.\n");
+            break;
+        case 2:
+            // Binary Search requires sorted array
+            bubbleSort(arr, n); // Sort the array first
+            printf("Sorted array: \n");
+            printArray(arr, n);
+            
+            // Perform Binary Search
+            result = binarySearch(arr, 0, n - 1, x);
+            if (result != -1)
+                printf("Element found at index %d using Binary Search.\n", result);
+            else
+                printf("Element not found using Binary Search.\n");
+            break;
+        default:
+            printf("Invalid choice!\n");
+            return 0;
+    }
+
+    return 0;
+}
