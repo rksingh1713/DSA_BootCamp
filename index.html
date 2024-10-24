@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Traffic Route Optimization</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <script src="https://maps.googleapis.com/maps/api/js?key={{ api_key }}&libraries=places"></script> <!-- Google Maps API -->
+</head>
+<body>
+    <div class="container">
+        <h1>Find the Shortest Route</h1>
+        <form id="routeForm">
+            <label for="source">Source:</label>
+            <input type="text" id="source" name="source" required>
+            
+            <label for="destination">Destination:</label>
+            <input type="text" id="destination" name="destination" required>
+
+            <button type="submit">Find Route</button>
+        </form>
+
+        <div id="result">
+            <p id="distance"></p>
+            <p id="duration"></p>
+        </div>
+
+        <div id="map" style="height: 500px; width: 100%;"></div> <!-- Map Display -->
+    </div>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>
