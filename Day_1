@@ -5,7 +5,7 @@
 #define MAX 100  // Maximum size of the stack
 
 // Stack structure
-struct Stack {
+struct Stack { 
     int top;
     int items[MAX];
 }; 
