@@ -4,7 +4,7 @@
 This project aims to find the shortest route between two locations using Dijkstra’s Algorithm and visualize the route on a map using the Google Maps JavaScript API. The web-based application allows users to input a source and destination, calculates the shortest path, and displays the route on an interactive map with traffic data, distance, and estimated travel time.
 
 ## Table of Contents
-1. [Technology Stack](#technology-stack)
+1. [Technology Stack](#technology-stack) 
 2. [Project Structure](#project-structure) 
 3. [Installation Guide](#installation-guide)
 4. [How It Works](#how-it-works)  
