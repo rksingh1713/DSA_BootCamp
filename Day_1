@@ -8,7 +8,7 @@
 struct Stack {
     int top;
     int items[MAX];
-};
+}; 
 
 // Function to initialize the stack
 void initStack(struct Stack* s) {
