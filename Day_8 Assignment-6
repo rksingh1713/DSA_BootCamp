@@ -10,7 +10,7 @@ struct Edge {
 };
 
 // Structure to represent a graph
-struct Graph {
+struct Graph { 
     int V, E; // V is the number of vertices, E is the number of edges
     struct Edge edge[MAX];
 };
