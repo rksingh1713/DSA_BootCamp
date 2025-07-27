@@ -7,7 +7,7 @@ app = Flask(__name__)
 # Set up Google Maps API
 API_KEY = 'api_here'  # Replace with your actual API key
 gmaps = googlemaps.Client(key=API_KEY)
-
+ 
 # Function to fetch coordinates using Geocoding API
 def get_coordinates(address):
     geocode_result = gmaps.geocode(address)
