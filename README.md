@@ -6,7 +6,7 @@ This project aims to find the shortest route between two locations using Dijkstr
 ## Table of Contents
 1. [Technology Stack](#technology-stack) 
 2. [Project Structure](#project-structure) 
-3. [Installation Guide](#installation-guide)
+3. [Installation Guide](#installation-guide) 
 4. [How It Works](#how-it-works)   
 5. [API Integration](#api-integration)  
 6. [Frontend Components](#frontend-components)
