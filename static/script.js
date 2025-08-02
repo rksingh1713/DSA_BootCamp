@@ -8,7 +8,7 @@ document.getElementById('routeForm').addEventListener('submit', function(event) 
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-        },
+        }, 
         body: JSON.stringify({ source, destination }),
     })
     .then(response => response.json()) 
