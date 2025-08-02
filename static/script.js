@@ -11,7 +11,7 @@ document.getElementById('routeForm').addEventListener('submit', function(event) 
         },
         body: JSON.stringify({ source, destination }),
     })
-    .then(response => response.json())
+    .then(response => response.json()) 
     .then(data => {
         if (data.error) {
             alert(data.error);
